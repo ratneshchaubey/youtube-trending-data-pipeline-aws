@@ -2,7 +2,7 @@
 
 An automated, cloud-native ETL pipeline that ingests YouTube trending video data for 10 regions, processes it through a **Bronze → Silver → Gold** medallion architecture, enforces a **data quality gate**, and serves analytics-ready tables through Amazon Athena. Orchestrated end to end with AWS Step Functions.
 
-![Architecture](YouTube%20Trending%20Data%20Pipeline.png)
+
 
 ```
 YouTube API v3 / Kaggle ─> S3 Bronze ─> Glue (Silver) ─> DQ Lambda ─> Glue (Gold) ─> Athena
@@ -13,7 +13,7 @@ YouTube API v3 / Kaggle ─> S3 Bronze ─> Glue (Silver) ─> DQ Lambda ─> Gl
 
 | Area | Tools |
 |---|---|
-| Storage | Amazon S3 (Parquet, Snappy) |
+| Storage | Amazon S3 (Parquet) |
 | Processing | AWS Glue (PySpark), AWS Lambda (Python, Pandas, AWS Wrangler, Boto3) |
 | Orchestration | AWS Step Functions, Amazon EventBridge (every 6 hours) |
 | Catalog / Query | Glue Data Catalog, Amazon Athena |
@@ -68,7 +68,6 @@ YouTube API v3 / Kaggle ─> S3 Bronze ─> Glue (Silver) ─> DQ Lambda ─> Gl
 - **Sources:** The live YouTube API is the primary source; Kaggle data is used for historical backfill and testing.
 - **Idempotency:** Silver deduplicates on (video, region, date), so reruns do not create duplicates. Gold is written with **[overwrite per partition / append]**.
 - **Format:** Partitioned Parquet with Snappy for cheap, fast Athena scans.
-- **Scale:** About **[X]** rows per run from the API plus **[X]M** historical rows; Glue/PySpark handles the backfill and the same job scales with more regions or higher frequency.
 
 ## Setup
 
