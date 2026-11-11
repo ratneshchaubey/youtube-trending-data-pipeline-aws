@@ -1,6 +1,6 @@
 # YouTube Trending Data Pipeline (AWS)
 
-An automated, cloud-native ETL pipeline that ingests YouTube trending video data for 10 regions, processes it through a **Bronze → Silver → Gold** medallion architecture, enforces a **data quality gate**, and serves analytics-ready tables through Amazon Athena. Orchestrated end to end with AWS Step Functions.
+An automated, cloud-native ETL pipeline that ingests YouTube trending video data for 4 regions, processes it through a **Bronze → Silver → Gold** medallion architecture, enforces a **data quality gate**, and serves analytics-ready tables through Amazon Athena. Orchestrated end to end with AWS Step Functions.
 
 
 
